@@ -1,0 +1,139 @@
+--
+-- Database: `e-pkia`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `admin`
+--
+
+CREATE TABLE `admin` (
+  `ID_admin` int(8) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `alamat` varchar(100) NOT NULL,
+  `jenis kelamin` varchar(13) NOT NULL,
+  `jam kerja` time(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `cek jaminan kesehatan`
+--
+
+CREATE TABLE `cek jaminan kesehatan` (
+  `no jkn` int(8) NOT NULL,
+  `alamat` varchar(100) NOT NULL,
+  `status` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `cek kesehatan`
+--
+
+CREATE TABLE `cek kesehatan` (
+  `rekam medis` text NOT NULL,
+  `konsultasi` varchar(200) NOT NULL,
+  `keluhan` varchar(200) NOT NULL,
+  `keterangan` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `konsultasi`
+--
+
+CREATE TABLE `konsultasi` (
+  `keterangan` varchar(100) NOT NULL,
+  `keluhan` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pendaftaran`
+--
+
+CREATE TABLE `pendaftaran` (
+  `ID_perndaftaran` int(8) NOT NULL,
+  `user_id` int(8) NOT NULL,
+  `tanggal pendaftaran` text NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pengingat`
+--
+
+CREATE TABLE `pengingat` (
+  `pengingat kesehatan` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tips`
+--
+
+CREATE TABLE `tips` (
+  `tips` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user`
+--
+
+CREATE TABLE `user` (
+  `user_id` int(8) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `no jkn` int(8) NOT NULL,
+  `no hp` int(13) NOT NULL,
+  `alamat` varchar(100) NOT NULL,
+  `tanggal lahir` date NOT NULL,
+  `usia` int(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`ID_admin`);
+
+--
+-- Indeks untuk tabel `cek jaminan kesehatan`
+--
+ALTER TABLE `cek jaminan kesehatan`
+  ADD PRIMARY KEY (`no jkn`);
+
+--
+-- Indeks untuk tabel `pendaftaran`
+--
+ALTER TABLE `pendaftaran`
+  ADD PRIMARY KEY (`ID_perndaftaran`),
+  ADD UNIQUE KEY `FK` (`user_id`);
+
+--
+-- Indeks untuk tabel `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `FK` (`no jkn`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
